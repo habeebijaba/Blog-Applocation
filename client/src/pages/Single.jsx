@@ -4,27 +4,26 @@ import axios from 'axios'
 import moment from 'moment'
 import Edit from '../images/edit.png'
 import Delete from '../images/delete.png'
+import Avatar from '../images/avatar1.png'
+import Badge from '../images/quality.png'
+
 import Menu from '../components/Menu'
 import { AuthContext } from '../context/authContext'
 import Swal from "sweetalert2"
 
-
 const Single = () => {
-
-
 
   const [post, setPost] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
   const postId = location.pathname.split("/")[2]
   const { currentUser } = useContext(AuthContext)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/posts/${postId}`)
         setPost(res.data)
-        console.log(post, "tis is post");
-        console.log(post.author.username, "this is username");
       } catch (error) {
         console.log(error);
       }
@@ -33,32 +32,43 @@ const Single = () => {
   }, [postId])
 
   const handleDelete = async () => {
-
-    
-
     try {
-      await axios.delete(`/posts/${postId}`)
-      navigate("/")
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await axios.delete(`/posts/${postId}`).then(() => {
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+            navigate("/")
+          })
+        }
+      })
+
     } catch (error) {
       console.log(error);
     }
   }
-
-
 
   return (
     <div className='single' >
       <div className="content">
         <img src={`../upload/${post?.img}`} alt="" />
         <div className="user">
-          <img className='profileimg' src="https://images.pexels.com/photos/9122851/pexels-photo-9122851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+          <img className='profileimg' src={Avatar} alt="" />
           <div className="info">
-            <span>{post?.author?.username}</span>
+            <span>{post?.author?.username}  <img className='badge' src={Badge} alt="" /> </span>
             <p>posted {moment(post.createdAt).fromNow()}</p>
           </div>
-
-
-
           {currentUser?.username === post?.author?.username && <div className="edit">
             <Link to={`/write?edit=2`} state={post} >
               <img src={Edit} alt="" />
@@ -67,13 +77,9 @@ const Single = () => {
           </div>}
         </div>
         <h1>{post.title} </h1>
-
-        {post.desc}
-
+        <p>{post.desc}</p>
       </div>
-
-      <Menu />
-
+      <Menu postId={postId} />
     </div>
   )
 }

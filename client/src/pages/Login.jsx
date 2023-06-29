@@ -11,9 +11,7 @@ const Login = () => {
 
   const [error, setError] = useState(null)
   const navigate = useNavigate()
-
-const {login}=useContext(AuthContext)
-// console.log(currentUser);
+  const { login } = useContext(AuthContext)
 
   const handleChange = e => {
     setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -27,20 +25,17 @@ const {login}=useContext(AuthContext)
     } catch (error) {
       setError(error.response.data)
     }
-
   }
 
   return (
     <div className='auth' >
-      <h1>Login</h1>
       <form>
+        <h1>Login</h1>
         <input required type="text" placeholder="email" name='email' onChange={handleChange} />
-        <input required type="password" placeholder="password"name='password' onChange={handleChange}/>
-        <button  onClick={handleSubmit}>Login</button>
+        <input required type="password" placeholder="password" name='password' onChange={handleChange} />
+        <button onClick={handleSubmit}>Login</button>
         {error && <p>{error}</p>}
-
         <span>Don't you have an account ? <Link to='/register'>Register</Link></span>
-
       </form>
     </div>
   )

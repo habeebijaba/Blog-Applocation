@@ -11,12 +11,14 @@ import Write from './pages/Write';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollTop';
 import './style.scss'
 
 const Layout=()=>{
   return(
     <>
     <Navbar/>
+    <ScrollToTopButton/>
     <Outlet/>
     <Footer/>
     </>

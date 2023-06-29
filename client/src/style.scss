@@ -21,12 +21,16 @@ $slightgreen: #b9e7e7;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: $slightgreen;
 
+            // background-color: $slightgreen;
             h1 {
-                font-size: 20px;
+                display: flex;
+                font-size: 50px;
                 color: teal;
                 margin-bottom: 20px;
+                justify-content: center;
+
+
             }
 
             form {
@@ -34,8 +38,10 @@ $slightgreen: #b9e7e7;
                 flex-direction: column;
                 padding: 50px;
                 background-color: white;
-                width: 200px;
-                gap: 20px;
+                width: 300px;
+                gap: 40px;
+                background-color: $slightgreen;
+
 
                 input {
                     padding: 10px;
@@ -67,18 +73,64 @@ $slightgreen: #b9e7e7;
         //NAVBAR
 
         .navbar {
+            border-bottom: 1px solid #000;
+
             .container {
                 padding: 10px 0px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
 
-                .logo {}
+                .logo {
+                    width: 150px;
+                    height: 65px;
+                }
 
                 .links {
                     display: flex;
                     align-items: center;
                     gap: 10px;
+
+                    .search {
+                        padding: 10px;
+                        width: 400px;
+                        border: none;
+                        border-bottom: 1px solid gray;
+                    }
+
+                    .search-suggestions {
+                        z-index: 22;
+                        position: absolute;
+                        top: 8%;
+                        left: 39%;
+                        width: 27%;
+                        max-height: 200px;
+                        overflow-y: auto;
+                        margin-top: 5px;
+                        padding: 10px;
+                        background-color: #fff;
+                        border: 1px solid #ccc;
+                        border-top: none;
+                        border-radius: 4px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                        list-style-type: none;
+                    }
+
+                    .search-suggestions__item {
+                        padding: 8px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+
+                        &:hover {
+                            background-color: #f2f2f2;
+                        }
+                    }
+
+                    .search-icon {
+                        height: 20px;
+                        width: 20px;
+                        cursor: pointer;
+                    }
 
                     h6 {
                         font-size: 16px;
@@ -137,7 +189,7 @@ $slightgreen: #b9e7e7;
                 display: flex;
                 gap: 100px;
 
-                &:nth-child(2n+1) {
+                &:nth-child(2n+2) {
                     flex-direction: row-reverse;
                 }
 
@@ -148,8 +200,8 @@ $slightgreen: #b9e7e7;
                     &::after {
                         content: "";
                         width: 100%;
-                        height: 100%;
-                        background-color: $slightgreen;
+                        height: 85%;
+                        background-color: rgb(205, 202, 202);
                         position: absolute;
                         top: 20px;
                         left: -20px;
@@ -168,6 +220,7 @@ $slightgreen: #b9e7e7;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    text-align: justify;
 
                     h1 {
                         font-size: 48px;
@@ -175,6 +228,8 @@ $slightgreen: #b9e7e7;
 
                     p {
                         font-size: 18px;
+                        overflow: hidden;
+                        max-height: 10.5em;
                     }
 
                     button {
@@ -208,12 +263,13 @@ $slightgreen: #b9e7e7;
                 flex: 5;
                 display: flex;
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
 
 
                 img {
+                    padding-top: 10px;
                     width: 100%;
-                    height: 300px;
+                    height: 350px;
                     object-fit: cover;
                 }
 
@@ -224,10 +280,16 @@ $slightgreen: #b9e7e7;
                     font-size: 14px;
 
                     .profileimg {
-                        width: 50px;
-                        height: 50px;
+                        width: 60px;
+                        height: 60px;
                         border-radius: 50%;
                         object-fit: cover;
+                    }
+
+                    .badge{
+                        width: 15px;
+                        height: 15px;
+                        
                     }
 
                     p {
@@ -350,8 +412,8 @@ $slightgreen: #b9e7e7;
                 flex-direction: column;
                 gap: 20px;
 
-                .item{
-                    border: 1px solid lightgray ;
+                .item {
+                    border: 1px solid lightgray;
                     padding: 10px;
                     flex: 1;
                     display: flex;
@@ -360,35 +422,37 @@ $slightgreen: #b9e7e7;
                     font-size: 12px;
                     color: #555;
 
-                    h1{
+                    h1 {
                         font-size: 20px;
                     }
 
-                    .file{
+                    .file {
                         text-decoration: underline;
                         cursor: pointer;
                     }
-                    .buttons{
+
+                    .buttons {
                         display: flex;
                         justify-content: space-between;
 
-                        :first-child{
+                        :first-child {
                             cursor: pointer;
-                            color:teal;
+                            color: teal;
                             background-color: white;
                             border: 1px solid teal;
                             padding: 3px 5px;
                         }
-                        :last-child{
+
+                        :last-child {
                             cursor: pointer;
-                            color:white;
+                            color: white;
                             background-color: teal;
                             border: 1px solid teal;
                             padding: 3px 5px;
                         }
                     }
 
-                    .cat{
+                    .cat {
                         display: flex;
                         align-items: center;
                         gap: 2px;
@@ -397,6 +461,46 @@ $slightgreen: #b9e7e7;
                 }
             }
         }
+
+        //SCROLL TO TOP
+
+        .scroll-to-top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #0eaef8;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+
+            &.visible {
+                opacity: 1;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+                width: 16px;
+                height: 16px;
+                border-right: 2px solid #fff;
+                border-top: 2px solid #fff;
+                transition: border-color 0.3s;
+            }
+
+            &:hover::after {
+                border-color: #ccc;
+            }
+        }
+
 
     }
 }
