@@ -23,7 +23,6 @@ const Single = () => {
       try {
         const res = await axios.get(`/posts/${postId}`);
         setPost(res.data);
-        console.log(res.data, "this sis the post from single");
       } catch (error) {
         console.log(error);
       }

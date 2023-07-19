@@ -13,7 +13,6 @@ const Write = () => {
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
   const img = state?.img || "";
-  console.log(state, "this is state");
 
   const navigate = useNavigate();
   const upload = async () => {
